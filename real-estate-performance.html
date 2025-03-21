@@ -20,31 +20,23 @@
         .sidebar {
             width: 250px;
             background-color: #f4f4f4;
-            padding: 20px;
+            padding: 60px 20px 20px; /* Added top padding to prevent overlap */
             position: fixed;
             height: 100%;
             overflow-y: auto;
             transition: transform 0.3s ease-in-out;
-        }
-        .sidebar h3 {
-            text-align: center;
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+            transform: translateX(-100%); /* Hide sidebar by default */
+            z-index: 1001;
         }
 
-        /* Mobile Sidebar Toggle */
+        /* Show sidebar when it's toggled */
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        /* Menu Button (Now Visible on All Devices) */
         .menu-btn {
-            display: none;
+            display: block;
             background-color: black;
             color: white;
             border: none;
@@ -53,8 +45,27 @@
             position: fixed;
             top: 10px;
             left: 10px;
-            z-index: 1001;
+            z-index: 1002;
             cursor: pointer;
+        }
+
+        /* Sidebar Content */
+        .sidebar h3 {
+            text-align: center;
+            margin-top: 0;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
         }
 
         /* Main Content */
@@ -68,7 +79,7 @@
         /* Header Navigation */
         header {
             display: flex;
-            justify-content: center; /* Centers the links */
+            justify-content: center;
             align-items: center;
             padding: 15px 20px;
             background-color: white;
@@ -97,7 +108,6 @@
         .nav-links a.active {
             text-decoration: underline;
         }
-
 
         /* Content Styling */
         .container {
@@ -130,59 +140,17 @@
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
-            /* Sidebar */
             .sidebar {
-                width: 250px;
-                background-color: #f4f4f4;
-                padding: 20px;
-                position: fixed;
-                height: 100%;
-                overflow-y: auto;
-                transition: transform 0.3s ease-in-out;
-                z-index: 1001; /* Make sure it's above the header */
-            }
-
-            .menu-btn {
-                display: none;
-                background-color: black;
-                color: white;
-                border: none;
-                padding: 10px;
-                font-size: 16px;
-                position: fixed;
-                top: 10px;
-                left: 10px;
-                z-index: 1002; /* Higher than both sidebar and header */
-                cursor: pointer;
-            }
-
-            /* Header Navigation */
-            header {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 15px 20px;
-                background-color: white;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-                position: sticky;
-                top: 0;
-                z-index: 1000; /* Keep it below the sidebar */
-                width: 100%;
-            }
-            .sidebar.open {
-                transform: translateX(0);
+                padding-top: 60px;
             }
             .main-content {
                 margin-left: 0;
                 padding: 15px;
             }
-            
             .nav-links {
                 flex-direction: column;
                 gap: 10px;
             }
-
-            /* Responsive Table */
             .container table {
                 display: block;
                 overflow-x: auto;
@@ -257,8 +225,19 @@
 
 <script>
     function toggleSidebar() {
-        document.getElementById("sidebar").classList.toggle("open");
+        let sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("open");
     }
+
+    // Close the sidebar when clicking outside of it
+    document.addEventListener("click", function(event) {
+        let sidebar = document.getElementById("sidebar");
+        let menuBtn = document.querySelector(".menu-btn");
+
+        if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
+            sidebar.classList.remove("open");
+        }
+    });
 </script>
 
 </body>
