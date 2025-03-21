@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real estate performance analysis and key metrics.">
+    <title>Real Estate Performance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .main-content {
+            margin-left: 270px;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+        .nav-links a.active {
+            text-decoration: underline;
+        }
+        .home-button {
+            background-color: black;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+        }
+        .container h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .container table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .container table, th, td {
+            border: 1px solid black;
+        }
+        .container th, .container td {
+            padding: 10px;
+            text-align: center;
+        }
+        .container th {
+            background-color: #f4f4f4;
+        }
+        .container ul {
+            text-align: left;
+            display: inline-block;
+        }
+        @media (max-width: 600px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>External Resources</h3>
+    <ul>
+        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <header>
+        <div>real-estate-performance.html</div>
+        <nav class="nav-links">
+            <a href="index.html">Overview</a>
+            <a href="real-estate-performance.html" class="active">Real Estate Performance</a>
+            <a href="market-trends.html">Market Trends</a>
+            <a href="index.html" class="home-button">Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Real Estate Performance</h1>
+        <p>This page provides key real estate performance metrics based on the dataset.</p>
+
+        <h2>Performance Summary</h2>
+        <table>
+            <tr>
+                <th>Region</th>
+                <th>Average Price</th>
+                <th>Number of Sales</th>
+                <th>Growth Rate</th>
+            </tr>
+            <tr>
+                <td>Toronto</td>
+                <td>$850,000</td>
+                <td>1,500</td>
+                <td>5.2%</td>
+            </tr>
+            <tr>
+                <td>Vancouver</td>
+                <td>$1,200,000</td>
+                <td>900</td>
+                <td>4.8%</td>
+            </tr>
+            <tr>
+                <td>Montreal</td>
+                <td>$600,000</td>
+                <td>1,100</td>
+                <td>3.9%</td>
+            </tr>
+            <tr>
+                <td>Calgary</td>
+                <td>$500,000</td>
+                <td>700</td>
+                <td>2.5%</td>
+            </tr>
+        </table>
+
+        <h2>Top Performing Regions</h2>
+        <ul>
+            <li>Toronto - Highest growth rate (5.2%)</li>
+            <li>Vancouver - Highest average price ($1.2M)</li>
+            <li>Montreal - Strong sales volume (1,100 sales)</li>
+        </ul>
+
+        <h2>Lowest Performing Regions</h2>
+        <ul>
+            <li>Calgary - Lowest growth rate (2.5%)</li>
+            <li>Montreal - Lower average price compared to Toronto & Vancouver</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A detailed analysis of the real estate market based on trends from a dataset.">
+    <title>Real Estate Report - Overview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .main-content {
+            margin-left: 270px;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+        .nav-links a.active {
+            text-decoration: underline;
+        }
+        .home-button {
+            background-color: black;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+        }
+        .container h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0;
+            margin: 20px 0;
+        }
+        .container p {
+            font-size: 1.1em;
+            color: #555;
+        }
+        @media (max-width: 600px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>External Resources</h3>
+    <ul>
+        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <header>
+        <div>index.html</div>
+        <nav class="nav-links">
+            <a href="#" class="active">Overview</a>
+            <a href="real-estate-performance.html">Real Estate Performance</a>
+            <a href="market-trends.html">Market Trends</a>
+            <a href="#" class="home-button">Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Overview of Real Estate Market</h1>
+        <p>By Reza Rehman, Cedric Liu, Arnav Khanna</p>
+        <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Modern house with a beautiful sunset in the background">
+        <p>
+            In this website, we will discuss an analysis of the real estate market based on trends from a dataset. 
+            The real estate market is constantly evolving, influenced by factors such as location, economic conditions, and buyer demand. 
+            Our data revealed that home prices tend to increase in high-demand urban areas, while suburban and rural markets offer more affordable options. 
+            We also observed seasonal price variations, with higher sales activity during spring and summer months. 
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

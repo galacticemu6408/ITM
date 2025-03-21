@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real estate market trends analysis with visualizations.">
+    <title>Market Trends</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            text-align: center;
+        }
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        .main-content {
+            margin-left: 270px;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
+        .nav-links a.active {
+            text-decoration: underline;
+        }
+        .home-button {
+            background-color: black;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .container {
+            text-align: center;
+            max-width: 900px;
+            margin: auto;
+        }
+        .container h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 20px auto;
+        }
+        form {
+            text-align: left;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        form input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        form button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>External Resources</h3>
+    <ul>
+        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <header>
+        <div>market-trends.html</div>
+        <nav class="nav-links">
+            <a href="index.html">Overview</a>
+            <a href="real-estate-performance.html">Real Estate Performance</a>
+            <a href="market-trends.html" class="active">Market Trends</a>
+            <a href="index.html" class="home-button">Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Market Trends</h1>
+        <p>This page provides a graphical representation of real estate market trends.</p>
+
+        <h2>Price Trends Over Time</h2>
+        <div class="chart-container">
+            <canvas id="priceTrendChart"></canvas>
+        </div>
+
+        <h2>Submit Your Property Preferences</h2>
+        <form>
+            <label for="budget">Budget Range ($):</label>
+            <select id="budget">
+                <option value="below-300k">Below 300K</option>
+                <option value="300k-500k">300K - 500K</option>
+                <option value="500k-800k">500K - 800K</option>
+                <option value="800k-1M">800K - 1M</option>
+                <option value="above-1M">Above 1M</option>
+            </select>
+
+            <label>Preferred Property Type:</label>
+            <input type="radio" id="house" name="property-type" value="House">
+            <label for="house">House</label>
+            <input type="radio" id="condo" name="property-type" value="Condo">
+            <label for="condo">Condo</label>
+            <input type="radio" id="apartment" name="property-type" value="Apartment">
+            <label for="apartment">Apartment</label>
+
+            <label for="location">Preferred Location:</label>
+            <input type="text" id="location" placeholder="Enter city or region">
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('priceTrendChart').getContext('2d');
+    const priceTrendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Average Home Price ($)',
+                data: [500000, 520000, 530000, 550000, 560000, 580000],
+                borderColor: 'blue',
+                borderWidth: 2,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
