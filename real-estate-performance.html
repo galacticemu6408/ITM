@@ -12,7 +12,11 @@
             padding: 0;
             background-color: white;
             display: flex;
+            flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
+
+        /* Sidebar */
         .sidebar {
             width: 250px;
             background-color: #f4f4f4;
@@ -20,6 +24,7 @@
             position: fixed;
             height: 100%;
             overflow-y: auto;
+            transition: transform 0.3s ease-in-out;
         }
         .sidebar h3 {
             text-align: center;
@@ -36,53 +41,77 @@
             color: #333;
             font-weight: bold;
         }
+
+        /* Mobile Sidebar Toggle */
+        .menu-btn {
+            display: none;
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1001;
+            cursor: pointer;
+        }
+
+        /* Main Content */
         .main-content {
             margin-left: 270px;
             flex-grow: 1;
             padding: 20px;
+            max-width: 100%;
         }
+
+        /* Header Navigation */
         header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Centers the links */
             align-items: center;
-            padding: 15px 50px;
+            padding: 15px 20px;
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            width: 100%;
         }
+
         .nav-links {
             display: flex;
-            align-items: center;
             gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
+
         .nav-links a {
             text-decoration: none;
             color: black;
             font-weight: bold;
             padding: 8px 15px;
+            white-space: nowrap;
         }
         .nav-links a.active {
             text-decoration: underline;
         }
-        .home-button {
-            background-color: black;
-            color: white !important;
-            padding: 8px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+
+
+        /* Content Styling */
         .container {
             text-align: center;
             max-width: 900px;
             margin: auto;
+            padding: 20px;
         }
         .container h1 {
             font-size: 2em;
             font-weight: bold;
         }
+
+        /* Table Styling */
         .container table {
             width: 100%;
             border-collapse: collapse;
@@ -98,23 +127,52 @@
         .container th {
             background-color: #f4f4f4;
         }
-        .container ul {
-            text-align: left;
-            display: inline-block;
-        }
-        @media (max-width: 600px) {
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block; /* Show menu button */
+            }
             .sidebar {
-                display: none;
+                transform: translateX(-100%);
+                position: fixed;
+                width: 250px;
+                left: 0;
+                top: 0;
+                height: 100%;
+                background-color: #f4f4f4;
+                transition: transform 0.3s ease-in-out;
+            }
+            .sidebar.open {
+                transform: translateX(0);
             }
             .main-content {
                 margin-left: 0;
+                padding: 15px;
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            /* Responsive Table */
+            .container table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
             }
         }
     </style>
 </head>
 <body>
 
-<div class="sidebar">
+<button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+<div class="sidebar" id="sidebar">
     <h3>External Resources</h3>
     <ul>
         <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
@@ -131,7 +189,6 @@
             <a href="index.html">Overview</a>
             <a href="real-estate-performance.html" class="active">Real Estate Performance</a>
             <a href="market-trends.html">Market Trends</a>
-            <a href="index.html" class="home-button">Home</a>
         </nav>
     </header>
 
@@ -172,21 +229,14 @@
                 <td>2.5%</td>
             </tr>
         </table>
-
-        <h2>Top Performing Regions</h2>
-        <ul>
-            <li>Toronto - Highest growth rate (5.2%)</li>
-            <li>Vancouver - Highest average price ($1.2M)</li>
-            <li>Montreal - Strong sales volume (1,100 sales)</li>
-        </ul>
-
-        <h2>Lowest Performing Regions</h2>
-        <ul>
-            <li>Calgary - Lowest growth rate (2.5%)</li>
-            <li>Montreal - Lower average price compared to Toronto & Vancouver</li>
-        </ul>
     </div>
 </div>
+
+<script>
+    function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+    }
+</script>
 
 </body>
 </html>
