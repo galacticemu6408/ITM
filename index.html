@@ -1,206 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A detailed analysis of the real estate market based on trends from a dataset.">
-    <title>Real Estate Report - Overview</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A detailed analysis of the real estate market based on trends from a dataset." />
+  <title>Real Estate Report - Overview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      overflow-x: hidden;
+    }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: #f4f4f4;
-            padding: 60px 20px 20px; /* Add top padding to prevent menu overlap */
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(-100%); /* Hide sidebar by default */
-            z-index: 1001;
-        }
+    .menu-btn {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1002;
+      cursor: pointer;
+    }
 
-        /* Show sidebar when it's toggled */
-        .sidebar.open {
-            transform: translateX(0);
-        }
+    .sidebar {
+      width: 250px;
+      background-color: #f4f4f4;
+      padding: 60px 20px 20px;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1001;
+    }
 
-        /* Menu Button (Always Visible) */
-        .menu-btn {
-            display: block;
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1002;
-            cursor: pointer;
-        }
+    .sidebar.open {
+      transform: translateX(0);
+    }
 
-        /* Sidebar Content */
-        .sidebar h3 {
-            text-align: center;
-            margin-top: 0; /* Ensure proper spacing */
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 0;
+    }
 
-        /* Main Content */
-        .main-content {
-            margin-left: 270px;
-            flex-grow: 1;
-            padding: 20px;
-            max-width: 100%;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        /* Header Navigation */
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-        }
+    .sidebar ul li {
+      margin: 10px 0;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            padding: 8px 15px;
-            white-space: nowrap;
-        }
-        .nav-links a.active {
-            text-decoration: underline;
-        }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        /* Content Styling */
-        .container {
-            text-align: center;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        .container h1 {
-            font-size: 2em;
-            font-weight: bold;
-        }
-        .container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0;
-            margin: 20px 0;
-        }
-        .container p {
-            font-size: 1.1em;
-            color: #555;
-        }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .sidebar {
-                padding-top: 60px;
-            }
-            .main-content {
-                margin-left: 0;
-                padding: 15px;
-            }
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-        }
-    </style>
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      padding: 8px 15px;
+    }
+
+    .nav-links a.active {
+      text-decoration: underline;
+    }
+
+    .main-content {
+      margin: 0 auto;
+      padding: 40px 20px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .main-content img {
+      max-width: 100%;
+      height: auto;
+      margin: 20px 0;
+    }
+
+    .main-content p {
+      font-size: 1.1em;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
 
-<button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
 
-<div class="sidebar" id="sidebar">
+  <div class="sidebar" id="sidebar">
     <h3>External Resources</h3>
     <ul>
-        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
-        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
-        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
-        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+      <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+      <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+      <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+      <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
     </ul>
-</div>
+  </div>
 
-<div class="main-content">
-    <header>
-        <div>index.html</div>
-        <nav class="nav-links">
-            <a href="#" class="active">Overview</a>
-            <a href="real-estate-performance.html">Real Estate Performance</a>
-            <a href="market-trends.html">Market Trends</a>
-        </nav>
-    </header>
+  <header>
+    <nav class="nav-links">
+      <a href="#" class="active">Overview</a>
+      <a href="real-estate-performance.html">Real Estate Performance</a>
+      <a href="market-trends.html">Market Trends</a>
+    </nav>
+  </header>
 
-    <div class="container">
-        <h1>Overview of Real Estate Market</h1>
-        <p>By Reza Rehman, Cedric Liu, Arnav Khanna</p>
-        <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Modern house with a beautiful sunset in the background">
-        <p>
-            In this website, we will discuss an analysis of the real estate market based on trends from a dataset. 
-            The real estate market is constantly evolving, influenced by factors such as location, economic conditions, and buyer demand. 
-            Our data revealed that home prices tend to increase in high-demand urban areas, while suburban and rural markets offer more affordable options. 
-            We also observed seasonal price variations, with higher sales activity during spring and summer months. 
-        </p>
-    </div>
-</div>
+  <div class="main-content">
+    <h1>Overview of Real Estate Market</h1>
+    <p>By Reza Rehman, Cedric Liu, Arnav Khanna</p>
+    <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Modern house with a beautiful sunset in the background" />
+    <p>
+      In this website, we will discuss an analysis of the real estate market based on trends from a dataset.
+      The real estate market is constantly evolving, influenced by factors such as location, economic conditions, and buyer demand.
+      Our data revealed that home prices tend to increase in high-demand urban areas, while suburban and rural markets offer more affordable options.
+      We also observed seasonal price variations, with higher sales activity during spring and summer months.
+    </p>
+  </div>
 
-<script>
+  <script>
     function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("open");
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
     }
 
-    // Close the sidebar when clicking outside of it
-    document.addEventListener("click", function(event) {
-        let sidebar = document.getElementById("sidebar");
-        let menuBtn = document.querySelector(".menu-btn");
+    document.addEventListener("click", function (event) {
+      const sidebar = document.getElementById("sidebar");
+      const menuBtn = document.querySelector(".menu-btn");
 
-        // Check if the sidebar is open and if the clicked target is NOT inside the sidebar or menu button
-        if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-            sidebar.classList.remove("open");
-        }
+      if (sidebar.classList.contains("open") &&
+        !sidebar.contains(event.target) &&
+        !menuBtn.contains(event.target)) {
+        sidebar.classList.remove("open");
+      }
     });
-</script>
-
+  </script>
 </body>
 </html>

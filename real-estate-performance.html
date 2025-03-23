@@ -1,244 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Real estate performance analysis and key metrics.">
-    <title>Real Estate Performance</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Real estate performance analysis and key metrics." />
+  <title>Real Estate Performance</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: white;
+      overflow-x: hidden;
+    }
 
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: #f4f4f4;
-            padding: 60px 20px 20px; /* Added top padding to prevent overlap */
-            position: fixed;
-            height: 100%;
-            overflow-y: auto;
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(-100%); /* Hide sidebar by default */
-            z-index: 1001;
-        }
+    .menu-btn {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1002;
+      cursor: pointer;
+    }
 
-        /* Show sidebar when it's toggled */
-        .sidebar.open {
-            transform: translateX(0);
-        }
+    .sidebar {
+      width: 250px;
+      background-color: #f4f4f4;
+      padding: 60px 20px 20px;
+      position: fixed;
+      height: 100%;
+      overflow-y: auto;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease-in-out;
+      z-index: 1001;
+    }
 
-        /* Menu Button (Now Visible on All Devices) */
-        .menu-btn {
-            display: block;
-            background-color: black;
-            color: white;
-            border: none;
-            padding: 10px;
-            font-size: 16px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 1002;
-            cursor: pointer;
-        }
+    .sidebar.open {
+      transform: translateX(0);
+    }
 
-        /* Sidebar Content */
-        .sidebar h3 {
-            text-align: center;
-            margin-top: 0;
-        }
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        .sidebar ul li {
-            margin: 10px 0;
-        }
-        .sidebar ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
+    .sidebar h3 {
+      text-align: center;
+      margin-top: 0;
+    }
 
-        /* Main Content */
-        .main-content {
-            margin-left: 270px;
-            flex-grow: 1;
-            padding: 20px;
-            max-width: 100%;
-        }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        /* Header Navigation */
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            width: 100%;
-        }
+    .sidebar ul li {
+      margin: 10px 0;
+    }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-            padding: 8px 15px;
-            white-space: nowrap;
-        }
-        .nav-links a.active {
-            text-decoration: underline;
-        }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        /* Content Styling */
-        .container {
-            text-align: center;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        .container h1 {
-            font-size: 2em;
-            font-weight: bold;
-        }
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        /* Table Styling */
-        .container table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        .container table, th, td {
-            border: 1px solid black;
-        }
-        .container th, .container td {
-            padding: 10px;
-            text-align: center;
-        }
-        .container th {
-            background-color: #f4f4f4;
-        }
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-weight: bold;
+      padding: 8px 15px;
+    }
 
-        /* Mobile Optimization */
-        @media (max-width: 768px) {
-            .sidebar {
-                padding-top: 60px;
-            }
-            .main-content {
-                margin-left: 0;
-                padding: 15px;
-            }
-            .nav-links {
-                flex-direction: column;
-                gap: 10px;
-            }
-            .container table {
-                display: block;
-                overflow-x: auto;
-                white-space: nowrap;
-            }
-        }
-    </style>
+    .nav-links a.active {
+      text-decoration: underline;
+    }
+
+    .main-content {
+      margin: 0 auto;
+      padding: 40px 20px;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .main-content h1 {
+      font-size: 2em;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 30px 0;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
 </head>
 <body>
 
-<button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
 
-<div class="sidebar" id="sidebar">
+  <div class="sidebar" id="sidebar">
     <h3>External Resources</h3>
     <ul>
-        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
-        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
-        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
-        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+      <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+      <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+      <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+      <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
     </ul>
-</div>
+  </div>
 
-<div class="main-content">
-    <header>
-        <div>real-estate-performance.html</div>
-        <nav class="nav-links">
-            <a href="index.html">Overview</a>
-            <a href="real-estate-performance.html" class="active">Real Estate Performance</a>
-            <a href="market-trends.html">Market Trends</a>
-        </nav>
-    </header>
+  <header>
+    <nav class="nav-links">
+      <a href="index.html">Overview</a>
+      <a href="real-estate-performance.html" class="active">Real Estate Performance</a>
+      <a href="market-trends.html">Market Trends</a>
+    </nav>
+  </header>
 
-    <div class="container">
-        <h1>Real Estate Performance</h1>
-        <p>This page provides key real estate performance metrics based on the dataset.</p>
+  <div class="main-content">
+    <h1>Real Estate Performance</h1>
+    <p>This page provides key real estate performance metrics based on the dataset.</p>
 
-        <h2>Performance Summary</h2>
-        <table>
-            <tr>
-                <th>Region</th>
-                <th>Average Price</th>
-                <th>Number of Sales</th>
-                <th>Growth Rate</th>
-            </tr>
-            <tr>
-                <td>Toronto</td>
-                <td>$850,000</td>
-                <td>1,500</td>
-                <td>5.2%</td>
-            </tr>
-            <tr>
-                <td>Vancouver</td>
-                <td>$1,200,000</td>
-                <td>900</td>
-                <td>4.8%</td>
-            </tr>
-            <tr>
-                <td>Montreal</td>
-                <td>$600,000</td>
-                <td>1,100</td>
-                <td>3.9%</td>
-            </tr>
-            <tr>
-                <td>Calgary</td>
-                <td>$500,000</td>
-                <td>700</td>
-                <td>2.5%</td>
-            </tr>
-        </table>
-    </div>
-</div>
+    <h2>Performance Summary</h2>
+    <table>
+      <tr>
+        <th>Region</th>
+        <th>Average Price</th>
+        <th>Number of Sales</th>
+        <th>Growth Rate</th>
+      </tr>
+      <tr>
+        <td>Toronto</td>
+        <td>$850,000</td>
+        <td>1,500</td>
+        <td>5.2%</td>
+      </tr>
+      <tr>
+        <td>Vancouver</td>
+        <td>$1,200,000</td>
+        <td>900</td>
+        <td>4.8%</td>
+      </tr>
+      <tr>
+        <td>Montreal</td>
+        <td>$600,000</td>
+        <td>1,100</td>
+        <td>3.9%</td>
+      </tr>
+      <tr>
+        <td>Calgary</td>
+        <td>$500,000</td>
+        <td>700</td>
+        <td>2.5%</td>
+      </tr>
+    </table>
+  </div>
 
-<script>
+  <script>
     function toggleSidebar() {
-        let sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("open");
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("open");
     }
 
-    // Close the sidebar when clicking outside of it
     document.addEventListener("click", function(event) {
-        let sidebar = document.getElementById("sidebar");
-        let menuBtn = document.querySelector(".menu-btn");
+      const sidebar = document.getElementById("sidebar");
+      const menuBtn = document.querySelector(".menu-btn");
 
-        if (sidebar.classList.contains("open") && !sidebar.contains(event.target) && !menuBtn.contains(event.target)) {
-            sidebar.classList.remove("open");
-        }
+      if (sidebar.classList.contains("open") &&
+          !sidebar.contains(event.target) &&
+          !menuBtn.contains(event.target)) {
+        sidebar.classList.remove("open");
+      }
     });
-</script>
+  </script>
 
 </body>
 </html>
