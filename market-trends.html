@@ -70,7 +70,7 @@
       justify-content: center;
       align-items: center;
       padding: 15px 20px;
-      background-color: white;
+      background-color: #97c4ff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
@@ -147,6 +147,12 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    .main-content img {
+        display: block;
+        margin: 20px auto; 
+        max-width: 90%;     
+        height: auto;      
+    }
   </style>
 </head>
 <body>
@@ -174,15 +180,41 @@
   </header>
 
   <div class="main-content container">
-    <h1>Market Trends</h1>
-    <p>This page provides a graphical representation of real estate market trends.</p>
+    <h1>Some more data</h1>
+    <p>Here you can find market data about number of bedrooms and bathrooms in various London neighborhoods. </p>
 
-    <h2>Price Trends Over Time</h2>
-    <div class="chart-container">
-      <canvas id="priceTrendChart"></canvas>
-    </div>
+    <img src="https://i.imgur.com/kWQbpmb.png" alt="graphnew1" />
+    <p>This graph compares the average number of bedrooms and bathrooms across 
+        various London neighborhoods. Central areas like 
+        Shoreditch and Soho tend to have more bedrooms, while bathroom counts 
+        remain fairly consistent throughout the rest of the neighbrohoods.</p>
+    <br>
+    <br>
+
+    <h2>Check Average Price per Square Meter</h2>
+    <label for="neighborhood-select">Choose a neighborhood:</label>
+    <select id="neighborhood-select" onchange="showPricePerSqM()">
+        <option value="">-- Select --</option>
+        <option value="Greenwich">Greenwich</option>
+        <option value="Shoreditch">Shoreditch</option>
+        <option value="Islington">Islington</option>
+        <option value="Camden">Camden</option>
+        <option value="Soho">Soho</option>
+        <option value="Marylebone">Marylebone</option>
+        <option value="Notting Hill">Notting Hill</option>
+        <option value="Kensington">Kensington</option>
+        <option value="Westminster">Westminster</option>
+        <option value="Chelsea">Chelsea</option>
+    </select>
+
+    <div id="price-per-sqm" style="margin-top: 20px; font-size: 1.2em; font-weight: bold;"></div>
+    <br>
+    <br>
 
     <h2>Submit Your Property Preferences</h2>
+    <p>Please let us know your property preferences! Your feedback means a lot to us and helps us organize our data 
+        for research purposes. Thank you so much for visiting out website!
+    </p>
     <form>
       <label for="budget">Budget Range ($):</label>
       <select id="budget">
@@ -198,7 +230,9 @@
 
       <button type="submit">Submit</button>
     </form>
+
   </div>
+  
 
   <script>
     function toggleSidebar() {
@@ -235,6 +269,35 @@
         maintainAspectRatio: false
       }
     });
+  </script>
+  <script>
+    const pricePerSqM = {
+      "Greenwich": 8444.44,
+      "Shoreditch": 8800.00,
+      "Islington": 9718.52,
+      "Camden": 10580.55,
+      "Soho": 11573.33,
+      "Marylebone": 12000.00,
+      "Notting Hill": 13124.64,
+      "Kensington": 15248.72,
+      "Westminster": 15648.00,
+      "Chelsea": 15786.67
+    };
+  
+    function showPricePerSqM() {
+      const selected = document.getElementById("neighborhood-select").value;
+      const output = document.getElementById("price-per-sqm");
+  
+      if (selected) {
+        const price = pricePerSqM[selected].toLocaleString("en-UK", {
+          style: "currency",
+          currency: "GBP"
+        });
+        output.textContent = `${selected}: ${price} per square meter`;
+      } else {
+        output.textContent = "";
+      }
+    }
   </script>
 </body>
 </html>
