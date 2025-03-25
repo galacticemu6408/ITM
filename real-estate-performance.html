@@ -1,288 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Real estate comparisions analysis and key metrics." />
-  <title>Real Estate Comparisions</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: white;
-      overflow-x: hidden;
-    }
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Real estate comparisions analysis and key metrics." />
+    <title>Real Estate Comparisions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            overflow-x: hidden;
+        }
 
-    .menu-btn {
-      background-color: black;
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      font-size: 16px;
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 1002;
-      cursor: pointer;
-    }
+        .menu-btn {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            font-size: 16px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1002;
+            cursor: pointer;
+        }
 
-    .sidebar {
-      width: 250px;
-      background-color: #f4f4f4;
-      padding: 60px 20px 20px;
-      position: fixed;
-      height: 100%;
-      overflow-y: auto;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease-in-out;
-      z-index: 1001;
-    }
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 60px 20px 20px;
+            position: fixed;
+            height: 100%;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 1001;
+        }
 
-    .sidebar.open {
-      transform: translateX(0);
-    }
+        .sidebar.open {
+            transform: translateX(0);
+        }
 
-    .sidebar h3 {
-      text-align: center;
-      margin-top: 0;
-    }
+        .sidebar h3 {
+            text-align: center;
+            margin-top: 0;
+        }
 
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    .sidebar ul li {
-      margin: 10px 0;
-    }
+        .sidebar ul li {
+            margin: 10px 0;
+        }
 
-    .sidebar ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
 
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 15px 20px;
-      background-color: #97c4ff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #97c4ff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: black;
-      font-weight: bold;
-      padding: 8px 15px;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            padding: 8px 15px;
+        }
 
-    .nav-links a.active {
-      text-decoration: underline;
-    }
+        .nav-links a.active {
+            text-decoration: underline;
+        }
 
-    .main-content {
-      margin: 0 auto;
-      padding: 40px 20px;
-      max-width: 900px;
-      text-align: center;
-    }
+        .main-content {
+            margin: 0 auto;
+            padding: 40px 20px;
+            max-width: 900px;
+            text-align: center;
+        }
 
-    .main-content h1 {
-      font-size: 2em;
-      font-weight: bold;
-    }
+        .main-content h1 {
+            font-size: 2em;
+            font-weight: bold;
+        }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 30px 0;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
 
-    th, td {
-      border: 1px solid black;
-      padding: 10px;
-      text-align: center;
-    }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
 
-    th {
-      background-color: #f4f4f4;
-    }
-    .main-content img {
-    display: block;
-    margin: 20px auto; 
-    max-width: 90%;   
-    height: auto;   
-    }   
-  </style>
-</head>
-<body>
+        th {
+            background-color: #f4f4f4;
+        }
+        .main-content img {
+            display: block;
+            margin: 20px auto; 
+            max-width: 90%;   
+            height: auto;   
+        }   
+    </style>
+    </head>
+    <body>
 
-  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+        <button class="btn btn-dark position-fixed top-0 start-0 m-3" style="z-index: 1002;" onclick="toggleSidebar()">☰ Menu</button>
 
-  <div class="sidebar" id="sidebar">
-    <h3>External Resources</h3>
-    <ul>
-      <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
-      <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
-      <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
-      <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
-      <li><a href="https://www.statista.com/" target="_blank">Statista</a></li>
-      <li><a href="https://www.numbeo.com/cost-of-living/" target="_blank">Numbeo</a></li>
-    </ul>
-  </div>
+    <div class="sidebar" id="sidebar">
+        <h3>External Resources</h3>
+        <ul>
+        <li><a href="https://www.realtor.ca/" target="_blank">Realtor.ca</a></li>
+        <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
+        <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
+        <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+        <li><a href="https://www.statista.com/" target="_blank">Statista</a></li>
+        <li><a href="https://www.numbeo.com/cost-of-living/" target="_blank">Numbeo</a></li>
+        </ul>
+    </div>
 
-  <header>
-    <nav class="nav-links">
-      <a href="index.html">Overview</a>
-      <a href="real-estate-performance.html" class="active">Real estate comparisions</a>
-      <a href="market-trends.html">Where Should I Live?</a>
-    </nav>
-  </header>
+    <header>
+        <nav class="nav-links">
+        <a href="index.html">Overview</a>
+        <a href="real-estate-performance.html" class="active">Real estate comparisions</a>
+        <a href="market-trends.html">Where Should I Live?</a>
+        </nav>
+    </header>
 
-  <div class="main-content">
-    <h1>Prices in London compared to other major cities</h1>
-    <p>This page provides key real estate price metrics based on data from numbeo, 
-        and compare London to Toronto, Montreal, New York City, Los Angeles, Paris, 
-        Sydney, Beijing, Tokyo, São Paulo, and Singapore.</p>
-    <br>
-    <p>Before we get into that data, here is a table summarizing the average 
-        prices of homes in London's different neighborhoods (2022-2024)
-    </p>
-    <h2>Prices of homes in different London neighborhoods (2022-2024)</h2>
-    <table>
-        <tr>
-          <th>Neighborhood</th>
-          <th>2022</th>
-          <th>2023</th>
-          <th>2024</th>
-        </tr>
-        <tr>
-          <td>Westminster</td>
-          <td>€ 2,245,714.29</td>
-          <td>€ 2,197,435.29</td>
-          <td>€ 2,824,300.00</td>
-        </tr>
-        <tr>
-          <td>Kensington</td>
-          <td>€ 2,194,720.54</td>
-          <td>€ 2,347,377.39</td>
-          <td>€ 2,285,789.93</td>
-        </tr>
-        <tr>
-          <td>Chelsea</td>
-          <td>€ 2,461,269.74</td>
-          <td>€ 2,473,985.13</td>
-          <td>€ 2,267,047.43</td>
-        </tr>
-        <tr>
-          <td>Marylebone</td>
-          <td>€ 1,663,102.04</td>
-          <td>€ 1,968,625.00</td>
-          <td>€ 1,889,812.50</td>
-        </tr>
-        <tr>
-          <td>Notting Hill</td>
-          <td>€ 1,921,679.70</td>
-          <td>€ 2,019,732.98</td>
-          <td>€ 1,849,422.00</td>
-        </tr>
-        <tr>
-          <td>Shoreditch</td>
-          <td>€ 1,321,639.95</td>
-          <td>€ 1,294,444.63</td>
-          <td>€ 1,771,000.00</td>
-        </tr>
-        <tr>
-          <td>Soho</td>
-          <td>€ 1,755,240.97</td>
-          <td>€ 1,837,247.15</td>
-          <td>€ 1,593,925.89</td>
-        </tr>
-        <tr>
-          <td>Camden</td>
-          <td>€ 1,661,864.93</td>
-          <td>€ 1,602,405.67</td>
-          <td>€ 1,527,451.11</td>
-        </tr>
-        <tr>
-          <td>Islington</td>
-          <td>€ 1,557,557.90</td>
-          <td>€ 1,460,071.11</td>
-          <td>€ 1,523,200.00</td>
-        </tr>
-        <tr>
-          <td>Greenwich</td>
-          <td>€ 1,185,528.34</td>
-          <td>€ 1,368,469.57</td>
-          <td>€ 1,192,777.67</td>
-        </tr>
-        <tr>
-          <td><strong>Average</strong></td>
-          <td><strong>€ 1,792,164.16</strong></td>
-          <td><strong>€ 1,874,974.34</strong></td>
-          <td><strong>€ 1,879,796.18</strong></td>
-        </tr>
-      </table>
-    <img src="https://i.imgur.com/px04GOj.png" alt="graph1" />
-    <p>London, with an average apartment cost of €13,335 per square meter, 
-        is one of the more expensive European metropolises to live in, 
-        trailing only Switzerland.
-    </p>
-    <br>
-    <img src="https://i.imgur.com/FCbaIi8.png" alt="graph2" />
-    <p>London's average rental price is not as consistent with average income; 
-        the cities price to income ratio is high, trailing only Singapore and Beijing.
-    </p>
-    <br>
-    <img src="https://i.imgur.com/PIFENHV.png" alt="graph3" />
-    <p>A one-bedroom in London, on average, will cost you more than $4,000 (CAD), 
-        making London one of the most expensive cities to live in.
-    </p>
-    <br>
-    <img src="https://i.imgur.com/Cs6kKim.png" alt="graph4" />
-    <p>While still more expensive than most places, New York City passes London 
-        as the second most expensive city for a three-bedroom apartment.
-    </p>
-    <br>
-    <img src="https://i.imgur.com/5ZfNvkB.png" alt="graph5" />
-    <p>London's steep prices don't get you that much space; London trails only 
-        Singapore at price per square meter.
-    </p>
-    <br>
-  </div>
+    <div class="main-content">
+        <h1>Prices in London compared to other major cities</h1>
+        <p>This page provides key real estate price metrics based on data from numbeo, 
+            and compare London to Toronto, Montreal, New York City, Los Angeles, Paris, 
+            Sydney, Beijing, Tokyo, São Paulo, and Singapore.</p>
+        <br>
+        <p>Before we get into that data, here is a table summarizing the average 
+            prices of homes in London's different neighborhoods (2022-2024)
+        </p>
+        <h2>Prices of homes in different London neighborhoods (2022-2024)</h2>
+        <table>
+            <tr>
+            <th>Neighborhood</th>
+            <th>2022</th>
+            <th>2023</th>
+            <th>2024</th>
+            </tr>
+            <tr>
+            <td>Westminster</td>
+            <td>€ 2,245,714.29</td>
+            <td>€ 2,197,435.29</td>
+            <td>€ 2,824,300.00</td>
+            </tr>
+            <tr>
+            <td>Kensington</td>
+            <td>€ 2,194,720.54</td>
+            <td>€ 2,347,377.39</td>
+            <td>€ 2,285,789.93</td>
+            </tr>
+            <tr>
+            <td>Chelsea</td>
+            <td>€ 2,461,269.74</td>
+            <td>€ 2,473,985.13</td>
+            <td>€ 2,267,047.43</td>
+            </tr>
+            <tr>
+            <td>Marylebone</td>
+            <td>€ 1,663,102.04</td>
+            <td>€ 1,968,625.00</td>
+            <td>€ 1,889,812.50</td>
+            </tr>
+            <tr>
+            <td>Notting Hill</td>
+            <td>€ 1,921,679.70</td>
+            <td>€ 2,019,732.98</td>
+            <td>€ 1,849,422.00</td>
+            </tr>
+            <tr>
+            <td>Shoreditch</td>
+            <td>€ 1,321,639.95</td>
+            <td>€ 1,294,444.63</td>
+            <td>€ 1,771,000.00</td>
+            </tr>
+            <tr>
+            <td>Soho</td>
+            <td>€ 1,755,240.97</td>
+            <td>€ 1,837,247.15</td>
+            <td>€ 1,593,925.89</td>
+            </tr>
+            <tr>
+            <td>Camden</td>
+            <td>€ 1,661,864.93</td>
+            <td>€ 1,602,405.67</td>
+            <td>€ 1,527,451.11</td>
+            </tr>
+            <tr>
+            <td>Islington</td>
+            <td>€ 1,557,557.90</td>
+            <td>€ 1,460,071.11</td>
+            <td>€ 1,523,200.00</td>
+            </tr>
+            <tr>
+            <td>Greenwich</td>
+            <td>€ 1,185,528.34</td>
+            <td>€ 1,368,469.57</td>
+            <td>€ 1,192,777.67</td>
+            </tr>
+            <tr>
+            <td><strong>Average</strong></td>
+            <td><strong>€ 1,792,164.16</strong></td>
+            <td><strong>€ 1,874,974.34</strong></td>
+            <td><strong>€ 1,879,796.18</strong></td>
+            </tr>
+        </table>
+        <img src="https://i.imgur.com/px04GOj.png" alt="graph1" />
+        <p>London, with an average apartment cost of €13,335 per square meter, 
+            is one of the more expensive European metropolises to live in, 
+            trailing only Switzerland.
+        </p>
+        <br>
+        <img src="https://i.imgur.com/FCbaIi8.png" alt="graph2" />
+        <p>London's average rental price is not as consistent with average income; 
+            the cities price to income ratio is high, trailing only Singapore and Beijing.
+        </p>
+        <br>
+        <img src="https://i.imgur.com/PIFENHV.png" alt="graph3" />
+        <p>A one-bedroom in London, on average, will cost you more than $4,000 (CAD), 
+            making London one of the most expensive cities to live in.
+        </p>
+        <br>
+        <img src="https://i.imgur.com/Cs6kKim.png" alt="graph4" />
+        <p>While still more expensive than most places, New York City passes London 
+            as the second most expensive city for a three-bedroom apartment.
+        </p>
+        <br>
+        <img src="https://i.imgur.com/5ZfNvkB.png" alt="graph5" />
+        <p>London's steep prices don't get you that much space; London trails only 
+            Singapore at price per square meter.
+        </p>
+        <br>
+    </div>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open");
-    }
+    <script>
+        function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("open");
+        }
 
-    document.addEventListener("click", function(event) {
-      const sidebar = document.getElementById("sidebar");
-      const menuBtn = document.querySelector(".menu-btn");
+        document.addEventListener("click", function(event) {
+        const sidebar = document.getElementById("sidebar");
+        const menuBtn = document.querySelector(".menu-btn");
 
-      if (sidebar.classList.contains("open") &&
-          !sidebar.contains(event.target) &&
-          !menuBtn.contains(event.target)) {
-        sidebar.classList.remove("open");
-      }
-    });
-  </script>
+        if (sidebar.classList.contains("open") &&
+            !sidebar.contains(event.target) &&
+            !menuBtn.contains(event.target)) {
+            sidebar.classList.remove("open");
+        }
+        });
+    </script>
 
-</body>
+    </body>
 </html>

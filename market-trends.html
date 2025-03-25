@@ -158,7 +158,7 @@
 </head>
 <body>
 
-  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+    <button class="btn btn-dark position-fixed top-0 start-0 m-3" style="z-index: 1002;" onclick="toggleSidebar()">☰ Menu</button>
 
   <div class="sidebar" id="sidebar">
     <h3>External Resources</h3>
@@ -221,14 +221,27 @@
         for research purposes. Thank you so much for visiting out website!
     </p>
     <form>
-      <label for="budget">Budget Range ($):</label>
-      <select id="budget">
-        <option value="below-300k">Below 300K</option>
-        <option value="300k-500k">300K - 500K</option>
-        <option value="500k-800k">500K - 800K</option>
-        <option value="800k-1M">800K - 1M</option>
-        <option value="above-1M">Above 1M</option>
-      </select>
+        <label class="fw-bold">Budget Range ($):</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="budget" id="below300k" value="below-300k">
+            <label class="form-check-label" for="below300k">Below 300K</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="budget" id="300k500k" value="300k-500k">
+            <label class="form-check-label" for="300k500k">300K - 500K</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="budget" id="500k800k" value="500k-800k">
+            <label class="form-check-label" for="500k800k">500K - 800K</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="budget" id="800k1m" value="800k-1M">
+            <label class="form-check-label" for="800k1m">800K - 1M</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="budget" id="above1m" value="above-1M">
+            <label class="form-check-label" for="above1m">Above 1M</label>
+        </div>
 
       <label for="location">Preferred Location:</label>
       <input type="text" id="location" placeholder="Enter city or region">
