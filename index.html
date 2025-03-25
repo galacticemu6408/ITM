@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="A detailed analysis of the real estate market based on trends from a dataset." />
-  <title>Real Estate Report - Overview</title>
+  <meta name="description" content="Overview of London's real estate market, including price trends and regional differences." />
+  <title>London Real Estate Overview</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: white;
+      background-color: rgb(255, 255, 255);
       overflow-x: hidden;
     }
 
@@ -69,7 +69,7 @@
       justify-content: center;
       align-items: center;
       padding: 15px 20px;
-      background-color: white;
+      background-color: #97c4ff;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       position: sticky;
       top: 0;
@@ -112,7 +112,20 @@
       font-size: 1.1em;
       color: #555;
     }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background-color: #eee;
+      margin: 30px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 18px;
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -125,6 +138,8 @@
       <li><a href="https://www.statcan.gc.ca/" target="_blank">Statistics Canada</a></li>
       <li><a href="https://www.zillow.com/research/" target="_blank">Zillow Research</a></li>
       <li><a href="https://www.bankofcanada.ca/" target="_blank">Bank of Canada</a></li>
+      <li><a href="https://www.statista.com/" target="_blank">Statista</a></li>
+      <li><a href="https://www.numbeo.com/cost-of-living/" target="_blank">Numbeo</a></li>
     </ul>
   </div>
 
@@ -137,33 +152,151 @@
   </header>
 
   <div class="main-content">
-    <h1>Overview of Real Estate Market</h1>
+    <h1>Overview of London's Real Estate Market</h1>
     <p>By Reza Rehman, Cedric Liu, Arnav Khanna</p>
-    <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Modern house with a beautiful sunset in the background" />
+
+    <img src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Modern house" />
+
+    <p>Interested in living in London? Here is a quick guide on prices in the city’s top neighborhoods, 
+        as well as a comparison of prices in London to other urban hotspots around the globe.</p>
     <p>
-      In this website, we will discuss an analysis of the real estate market based on trends from a dataset.
-      The real estate market is constantly evolving, influenced by factors such as location, economic conditions, and buyer demand.
-      Our data revealed that home prices tend to increase in high-demand urban areas, while suburban and rural markets offer more affordable options.
-      We also observed seasonal price variations, with higher sales activity during spring and summer months.
+      This project explores the dynamics of London’s real estate market from 2022 to 2024. 
+      Our analysis highlights key trends including rising average prices, neighborhood-level differences, and overall market volatility.
+      Average house prices across London range from <strong>£400,000 to over £1,500,000</strong>, with central boroughs showing higher values.
     </p>
+    <p>
+      Using our dataset, we observed seasonal pricing spikes during summer months and a steady year-over-year increase. 
+      Continue to the next section to compare London’s affordability with other major global cities.
+    </p>
+    <br>
+    <h1>Map of London</h1>
+    <img src="https://londonmap360.com/website/var/tmp/image-thumbnails/0/871/thumb__map/london-borough-map.pjpeg" alt="Map of london" />
+
+    <h2>Check Neighborhood Prices</h2>
+    <label for="neighborhoodSelect"><strong>Select a Neighborhood:</strong></label>
+    <select id="neighborhoodSelect" onchange="showPrices()">
+        <option value="">-- Choose --</option>
+        <option value="Westminster">Westminster</option>
+        <option value="Kensington">Kensington</option>
+        <option value="Chelsea">Chelsea</option>
+        <option value="Marylebone">Marylebone</option>
+        <option value="Notting Hill">Notting Hill</option>
+        <option value="Shoreditch">Shoreditch</option>
+        <option value="Soho">Soho</option>
+        <option value="Camden">Camden</option>
+        <option value="Islington">Islington</option>
+        <option value="Greenwich">Greenwich</option>
+        <option value="Average">Average</option>
+    </select>
+
+    <div id="priceDisplay" style="margin-top: 20px; font-size: 18px; color: #333;"></div>
+    <canvas id="priceChart" width="400" height="200" style="margin-top: 30px;"></canvas>
   </div>
 
-  <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      sidebar.classList.toggle("open");
+    <script>
+        function toggleSidebar() {
+        const sidebar = document.getElementById("sidebar");
+        sidebar.classList.toggle("open");
+        }
+
+        document.addEventListener("click", function (event) {
+        const sidebar = document.getElementById("sidebar");
+        const menuBtn = document.querySelector(".menu-btn");
+
+        if (sidebar.classList.contains("open") &&
+            !sidebar.contains(event.target) &&
+            !menuBtn.contains(event.target)) {
+            sidebar.classList.remove("open");
+        }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+    const neighborhoodData = {
+        "Westminster": ["2245714.29", "2197435.29", "2824300.00"],
+        "Kensington": ["2194720.54", "2347377.39", "2285789.93"],
+        "Chelsea": ["2461269.74", "2473985.13", "2267047.43"],
+        "Marylebone": ["1663102.04", "1968625.00", "1889812.50"],
+        "Notting Hill": ["1921679.70", "2019732.98", "1849422.00"],
+        "Shoreditch": ["1321639.95", "1294444.63", "1771000.00"],
+        "Soho": ["1755240.97", "1837247.15", "1593925.89"],
+        "Camden": ["1661864.93", "1602405.67", "1527451.11"],
+        "Islington": ["1557557.90", "1460071.11", "1523200.00"],
+        "Greenwich": ["1185528.34", "1368469.57", "1192777.67"],
+        "Average": ["1792164.16", "1874974.34", "1879796.18"]
+    };
+
+    let chartInstance = null;
+
+    function showPrices() {
+        const selected = document.getElementById("neighborhoodSelect").value;
+        const display = document.getElementById("priceDisplay");
+
+        if (!selected) {
+        display.innerHTML = "";
+        if (chartInstance) {
+            chartInstance.destroy();
+        }
+        return;
+        }
+
+        const rawPrices = neighborhoodData[selected];
+        const formattedPrices = rawPrices.map(p => `€ ${parseFloat(p).toLocaleString()}`);
+        display.innerHTML = `
+        <strong>${selected} Prices:</strong><br>
+        2022: ${formattedPrices[0]}<br>
+        2023: ${formattedPrices[1]}<br>
+        2024: ${formattedPrices[2]}
+        `;
+
+        const ctx = document.getElementById("priceChart").getContext("2d");
+
+        if (chartInstance) {
+        chartInstance.destroy();
+        }
+
+        chartInstance = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: ["2022", "2023", "2024"],
+            datasets: [{
+            label: `Prices for ${selected}`,
+            data: rawPrices.map(p => parseFloat(p)),
+            backgroundColor: ["#4a90e2", "#7ed6df", "#70a1ff"]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+            legend: {
+                display: false
+            },
+            tooltip: {
+                callbacks: {
+                label: function(context) {
+                    return `€ ${context.parsed.y.toLocaleString()}`;
+                }
+                }
+            }
+            },
+            scales: {
+            y: {
+                title: {
+                display: true,
+                text: 'Price (€)'
+                },
+                ticks: {
+                callback: function(value) {
+                    return `€${value.toLocaleString()}`;
+                }
+                }
+            }
+            }
+        }
+        });
     }
+    </script>
 
-    document.addEventListener("click", function (event) {
-      const sidebar = document.getElementById("sidebar");
-      const menuBtn = document.querySelector(".menu-btn");
-
-      if (sidebar.classList.contains("open") &&
-        !sidebar.contains(event.target) &&
-        !menuBtn.contains(event.target)) {
-        sidebar.classList.remove("open");
-      }
-    });
-  </script>
 </body>
 </html>
