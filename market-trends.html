@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTgtF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Real estate market trends analysis with visualizations." />
   <title>Market Trends</title>
@@ -174,8 +175,8 @@
   <header>
     <nav class="nav-links">
       <a href="index.html">Overview</a>
-      <a href="real-estate-performance.html">Real Estate Performance</a>
-      <a href="market-trends.html" class="active">Market Trends</a>
+      <a href="real-estate-performance.html">Real Estate Comparisions</a>
+      <a href="market-trends.html" class="active">Where Should I Live?</a>
     </nav>
   </header>
 
@@ -191,9 +192,10 @@
     <br>
     <br>
 
-    <h2>Check Average Price per Square Meter</h2>
-    <label for="neighborhood-select">Choose a neighborhood:</label>
-    <select id="neighborhood-select" onchange="showPricePerSqM()">
+    <h2 class="mt-5">Check Average Price per Square Meter</h2>
+    <div class="text-center mt-3">
+    <label for="neighborhood-select" class="form-label fw-bold">Choose a neighborhood:</label>
+    <select id="neighborhood-select" class="form-select w-auto mx-auto" onchange="showPricePerSqM()">
         <option value="">-- Select --</option>
         <option value="Greenwich">Greenwich</option>
         <option value="Shoreditch">Shoreditch</option>
@@ -206,6 +208,7 @@
         <option value="Westminster">Westminster</option>
         <option value="Chelsea">Chelsea</option>
     </select>
+    </div>
 
     <div id="price-per-sqm" style="margin-top: 20px; font-size: 1.2em; font-weight: bold;"></div>
     <br>

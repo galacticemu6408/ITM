@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Overview of London's real estate market, including price trends and regional differences." />
@@ -129,7 +130,7 @@
 </head>
 <body>
 
-  <button class="menu-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="btn btn-dark position-fixed top-0 start-0 m-3" onclick="toggleSidebar()">☰ Menu</button>
 
   <div class="sidebar" id="sidebar">
     <h3>External Resources</h3>
@@ -146,8 +147,8 @@
   <header>
     <nav class="nav-links">
       <a href="#" class="active">Overview</a>
-      <a href="real-estate-performance.html">Real Estate Performance</a>
-      <a href="market-trends.html">Market Trends</a>
+      <a href="real-estate-performance.html">Real Estate Comparisions</a>
+      <a href="market-trends.html">Where Should I Live?</a>
     </nav>
   </header>
 
@@ -173,9 +174,8 @@
     <img src="https://londonmap360.com/website/var/tmp/image-thumbnails/0/871/thumb__map/london-borough-map.pjpeg" alt="Map of london" />
 
     <h2>Check Neighborhood Prices</h2>
-    <label for="neighborhoodSelect"><strong>Select a Neighborhood:</strong></label>
-    <select id="neighborhoodSelect" onchange="showPrices()">
-        <option value="">-- Choose --</option>
+    <select id="neighborhoodSelect" class="form-select w-auto mx-auto mt-2" onchange="showPrices()">
+        <option value="">Choose a neighborhood</option>
         <option value="Westminster">Westminster</option>
         <option value="Kensington">Kensington</option>
         <option value="Chelsea">Chelsea</option>
